@@ -111,7 +111,7 @@
     <hr/>
 
     <div class="section">
-       <h2><center>Отправить деньги</center></h2>
+       <h2><center>Отправить payable tokens</center></h2>
       <p align="left"><left> Здесь можно кому-то перевести деньги вручную.</left></p><br>
      </br>
     <label>   Сумма перевода </label><input type="text" id="transfer_am" value="10" />
@@ -122,29 +122,40 @@
      <hr/>
 
 
-
      <div class="section">
-        <h2><center>Выпустить деньги</center></h2>
-      <label>  Сумма эмиссии </label><input type="text" id="mint_am" value="10" /> </br>
-
-        <label>  Кому будут перечислены новые монеты </label><input type="text" id="mint_to" />
-
-          <button id="mint" onclick="App.mintToken()">Отчеканить!</button>
-          <span id="mint_result"></span>
+        <h2><center>Отправить ICO токены</center></h2>
+       <p align="left"><left> Здесь можно кому-то перевести деньги вручную.</left></p><br>
+      </br>
+     <label>   Сумма перевода </label><input type="text" id="transfer_am2" />
+     <label>   Кому </label><input type="text" id="transfer_to2" />
+          <button id="transfer2" onclick="App.sendICOToken()">Перевести</button>
+          <span id="transfer_result2" color="blue"></span>
       </div>
       <hr/>
 
+
       <div class="section">
-         <h2><center>Сжечь деньги</center></h2>
-         <img src="http://cs6.pikabu.ru/images/previews_comm/2015-04_6/14302429718714.jpg"> </img></br>
-       <label>  Сумма сгорания </label><input type="text" id="burn_am" value="10" /> </br>
+         <h2><center>Купить токены кефиром</center></h2>
+        <p align="left"><left> Принять участие в ICO за Ether.</left></p><br>
+       </br>
+      <label>   Сумма перевода </label><input type="text" id="fundAmount" />
 
-
-
-           <button id="mint" onclick="App.burnTokens()">Фтопку!</button>
-           <span id="mint_result"></span>
+           <button  onclick="App.sendMoney()">Перевести</button>
+           <span id="money_result" color="blue"></span>
        </div>
        <hr/>
+
+       <div class="section">
+          <h2><center>Payable tokens allowance</center></h2>
+         <p align="left"><left> Разрешить контракту ICO запрашивать токены с контракта ERC20 токена</left></p><br>
+        </br>
+       <label>   Сумма перевода </label><input type="text" id="allowAmount"  />
+
+            <button  onclick="App.Allow()">Перевести</button>
+            <span id="allow_result" color="blue"></span>
+        </div>
+        <hr/>
+
 
 <!--
  <div class="section">
