@@ -34,6 +34,7 @@ contract CDT is StandardToken,Ownable {
   string public constant symbol = "CDT";
   uint public constant decimals = 18;
   uint public TOKEN_SUPPLY_LIMIT = 606 * 100000 * (1 ether / 1 wei);
+  token public payableTokenAddress;
   // replace with your fund collection multisig address
   address public constant multisig = 0x0;
 
@@ -43,8 +44,8 @@ contract CDT is StandardToken,Ownable {
 
 
 //constructor
-function CDT(){
-  
+function CDT(token paybleToken){
+  payableTokenAddress = token(paybleToken);
 }
 
 
@@ -78,8 +79,15 @@ function CDT(){
   }
 
 
+
+
 //Function allowing ICO participating for Ethereum ERC20 token holders.
-function buyforTokens(address recepient) payable {
+///@param value - how much payable tokens will be paid.
+function buyforTokens(address recepient, uint value) payable {
+    uint allowed = payableTokenAddress.allowance(recepient,this);
+    if (value < allowed) throw;
+    payableTokenAddress.transferFrom(recepient,this,value);
+
 
 }
 

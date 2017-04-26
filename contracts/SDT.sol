@@ -9,6 +9,8 @@ import "./Zeppelin/ownership/Ownable.sol";
 
 /*
  *  Sonm Dummy Token for test
+*
+ *  In this test SDT will be used as PAYABLE TOKEN for ICO
  *
  * Very simple ERC20 Token example, where all tokens are pre-assigned
  * to the creator. Note they can later distribute these tokens
