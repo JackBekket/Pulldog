@@ -1,6 +1,6 @@
 # Pull Dog
 
-    Logic of function is next - user, which want to participate in ICO for
+   Logic of function is next - user, which want to participate in ICO for
     ERC20 compatible Ethereum token (like ```FirstBlood``` or ```Chronobank```) must
     invoke  ```allow``` function for himself on original paybale token contract and then  
     invoke ```buyforTokens``` function on ICO contract.
