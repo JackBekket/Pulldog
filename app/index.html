@@ -1,23 +1,173 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MetaCoin - Truffle Webpack Demo w/ Frontend</title>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  <script src="./app.js"></script>
-</head>
-<body>
-  <h1>MetaCoin</h1>
-  <h2>Example Truffle Dapp</h2>
-  <h3>You have <span class="black"><span id="balance"></span> META</span></h3>
+<meta charset="utf-8">
+  <title>BigFundToken</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .section {
+      margin: 20px;
+    }
+    button {
+      padding: 5px 16px;
+      border-radius: 4px;
+    }
+    button#changeQuota { background-color: yellow; }
+    button#transfer { }
 
-  <br>
-  <h1>Send MetaCoin</h1>
-  <br><label for="amount">Amount:</label><input type="text" id="amount" placeholder="e.g., 95"></input>
-  <br><label for="receiver">To Address:</label><input type="text" id="receiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
-  <br><br><button id="send" onclick="App.sendCoin()">Send MetaCoin</button>
-  <br><br>
-  <span id="status"></span>
-  <br>
-  <span class="hint"><strong>Hint:</strong> open the browser developer console to view any errors and warnings.</span>
+    button#buyTicket { background-color: #98fb98; }
+    button#refundTicket { background-color: pink; }
+
+
+  </style>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!--
+<link href="./app.css" rel='stylesheet' type='text/css'>
+-->
+
+
+<script type="text/javascript" src="./app.js"></script>
+
+
+
+
+
+</head>
+
+<h2><center>Создание контракта</center></h2>
+<hr>
+<p> Здесь располагается секция создания новых токенов </p>
+<br>
+<label>Имя токена<input type="text" id="t_name" value="BigToken" /> <br>
+  <label>Symbol<input type="text" id="t_sym" value="BFG" /> <br>
+    <label>INITIAL_SUPPLY<input type="text" id="t_val" value="10000" /> <br>
+
+<span id="createStatus"></span>
+<br><br><td align="right"> <button id="CreateEscr" onclick="App.deployContract()">New</button></td>
+
+
+
+
+<body>
+
+<h1>Token manager</h1>
+<div class="section">
+  <label>Введите адрес контракта токена для управления <input id="address"><br>
+    <button id='adr' onclick="App.startManager()">Ввод!</button><br>
+    <hr>
+
+
+  <h1>SimpleToken Bank</h1>
+  <div class="section">
+    Контракт размещен на: <div id="tokdAddress"></div>
+  </div>
+
+
+<!--  <div class="section">
+    Количество участников: <span id="numRegistrants">0</span>
+  </div>
+-->
+
+  <hr/>
+</br>
+
+    <div class="section">
+       <h2><center>General Info</center></h2>
+       <hr/></br>
+       <h2><center>How much have been emited ever  </center></h2> </br>
+     <h3> <span id="totalSup"></span><span id="t_sym1"></span></h3></br>
+
+
+
+     <hr/>
+     </div>
+     <hr/>
+
+
+  <div class="section">
+     <h2>Balance</h2>
+     <hr/>
+   </br>
+   <h3>У вас  <span id="balance"></span>  <span id="t_sym1"></span></h3>
+   <hr/>
+   </div>
+   <hr/>
+
+   <div class="section">
+
+    <h3>Статус: <span id="status"></span></h3>
+    <hr/>
+
+    </div>
+    <hr/>
+
+    <div class="section">
+       <h2><center>Отправить деньги</center></h2>
+      <p align="left"><left> Здесь можно кому-то перевести деньги вручную.</left></p><br>
+     </br>
+    <label>   Сумма перевода </label><input type="text" id="transfer_am" value="10" />
+    <label>   Кому </label><input type="text" id="transfer_to" />
+         <button id="transfer" onclick="App.sendToken()">Перевести</button>
+         <span id="transfer_result" color="blue"></span>
+     </div>
+     <hr/>
+
+
+
+     <div class="section">
+        <h2><center>Выпустить деньги</center></h2>
+      <label>  Сумма эмиссии </label><input type="text" id="mint_am" value="10" /> </br>
+
+        <label>  Кому будут перечислены новые монеты </label><input type="text" id="mint_to" />
+
+          <button id="mint" onclick="App.mintToken()">Отчеканить!</button>
+          <span id="mint_result"></span>
+      </div>
+      <hr/>
+
+      <div class="section">
+         <h2><center>Сжечь деньги</center></h2>
+         <img src="http://cs6.pikabu.ru/images/previews_comm/2015-04_6/14302429718714.jpg"> </img></br>
+       <label>  Сумма сгорания </label><input type="text" id="burn_am" value="10" /> </br>
+
+
+
+           <button id="mint" onclick="App.burnTokens()">Фтопку!</button>
+           <span id="mint_result"></span>
+       </div>
+       <hr/>
+
+<!--
+ <div class="section">
+    <h2>Финансировать проект</h2>
+    Сумма взноса: <input type="text" id="fundAmount" value="10" />
+      Адрес с которого будут внесены деньги: <input type="text" id="DeposAddress" />
+      <button id="DepositFund">Внести финансирование</button>
+      <span id="DepositFundResult"></span>
+  </div>
+  <hr/>
+-->
+
+
+
+
+
+<!--
+ <div class="section">
+    <h2> Провести все транзакции</h2>
+
+      <button id="ProcAll" onclick="App.getAll()">Добавить получателя</button>
+      <span id="AllResult"></span>
+ </br>
+
+  </div>
+-->
+
+
+
 </body>
 </html>
