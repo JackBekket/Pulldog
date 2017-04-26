@@ -1,8 +1,15 @@
-var ConvertLib = artifacts.require("./ConvertLib.sol");
-var MetaCoin = artifacts.require("./MetaCoin.sol");
+//var ConvertLib = artifacts.require("./ConvertLib.sol");
+//var MetaCoin = artifacts.require("./MetaCoin.sol");
+
+
+
+var Token = artifacts.require("./SDT.sol");
+var Crowdsale = artifacts.require("./CDT.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(ConvertLib);
-  deployer.link(ConvertLib, MetaCoin);
-  deployer.deploy(MetaCoin);
+
+
+  deployer.deploy(Token);
+  deployer.deploy(Crowdsale,Token.address);
+
 };
