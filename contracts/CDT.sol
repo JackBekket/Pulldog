@@ -79,19 +79,34 @@ function CDT(token paybleToken){
   }
 
 
+//
+
 
 
 //Function allowing ICO participating for Ethereum ERC20 token holders.
 ///@param value - how much payable tokens will be paid.
 function buyforTokens(address recepient, uint value) payable {
+
+    //check for limit
+    uint newTokens = value.mul(getPrice());
+    if (totalSupply + newTokens > TOKEN_SUPPLY_LIMIT) throw;
+
+    //check for allowance and transferFrom
     uint allowed = payableTokenAddress.allowance(recepient,this);
     if (value < allowed) throw;
     payableTokenAddress.transferFrom(recepient,this,value);
 
 
+    totalSupply = totalSupply.add(newTokens);
+
+    balances[recipient] = balances[recipient].add(newTokens);
+
+    }
+
+function withdrawTokens() onlyOwner {
+
+    payableTokenAddress.transfer();
 }
-
-
 
 
 }
