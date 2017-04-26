@@ -11,6 +11,22 @@ import "./StandardToken.sol";
  * IMPORTANT NOTE: do not use or deploy this contract as-is.
  * It needs some changes to be production ready.
  */
+
+
+ /* The token type is defines ERC20 compatable token which can be exchange to current ICO tokens. */
+ contract token {
+     mapping (address => uint) public balances;
+     function transferFrom(address _from, address _to, uint256 _value) returns (bool success);
+     function transfer(address _to, uint _value) returns (bool success);
+     function balanceOf(address _owner) constant returns (uint balance);
+     function approve(address _spender, uint _value) returns (bool success);
+     function allowance(address _owner, address _spender) constant returns (uint remaining);
+
+ }
+
+
+
+
 contract CDT is StandardToken {
 
   string public constant name = "CrowdsaleDummyToken";
