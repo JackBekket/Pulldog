@@ -1,8 +1,9 @@
 pragma solidity ^0.4.8;
 
 
-import "./StandardToken.sol";
+import "./Zeppelin/StandardToken.sol";
 
+import "./Zeppelin/ownership/Ownable.sol";
 
 /*
  * CrowdsaleToken (CrowdsaleDummyToken)
@@ -27,7 +28,7 @@ import "./StandardToken.sol";
 
 
 
-contract CDT is StandardToken {
+contract CDT is StandardToken,Ownable {
 
   string public constant name = "CrowdsaleDummyToken";
   string public constant symbol = "CDT";
@@ -39,6 +40,13 @@ contract CDT is StandardToken {
 
   // 1 ether = 500 example tokens
   uint public constant PRICE = 606;
+
+
+//constructor
+function CDT(){
+  
+}
+
 
 //fallback
   function () payable {
@@ -72,7 +80,7 @@ contract CDT is StandardToken {
 
 //Function allowing ICO participating for Ethereum ERC20 token holders.
 function buyforTokens(address recepient) payable {
-  
+
 }
 
 
