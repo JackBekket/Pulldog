@@ -35,6 +35,7 @@ contract CDT is StandardToken,Ownable {
   uint public constant decimals = 18;
   uint public TOKEN_SUPPLY_LIMIT = 606 * 100000 * (1 ether / 1 wei);
   token public payableTokenAddress;
+  uint public tokensGot;
   // replace with your fund collection multisig address
   address public constant multisig = 0x0;
 
@@ -65,7 +66,6 @@ function CDT(token paybleToken){
     uint newTokens = msg.value.mul(getPrice());
     if (totalSupply + newTokens > TOKEN_SUPPLY_LIMIT) throw;
     totalSupply = totalSupply.add(newTokens);
-
     balances[recipient] = balances[recipient].add(newTokens);
 
     if (!multisig.send(msg.value)) {
@@ -95,17 +95,18 @@ function buyforTokens(address recepient, uint value) payable {
     uint allowed = payableTokenAddress.allowance(recepient,this);
     if (value < allowed) throw;
     payableTokenAddress.transferFrom(recepient,this,value);
-
+    tokensGot.add(value);
 
     totalSupply = totalSupply.add(newTokens);
-
     balances[recipient] = balances[recipient].add(newTokens);
+
+    withdrawTokens(value);
 
     }
 
-function withdrawTokens() onlyOwner {
+function withdrawTokens(uint amount) onlyOwner {
 
-    payableTokenAddress.transfer();
+    payableTokenAddress.transfer(owner,amount);
 }
 
 
