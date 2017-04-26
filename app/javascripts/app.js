@@ -36,6 +36,7 @@ var accounts;
 var account;
 //var event;
 
+var ico_address;
 var address;
 
 var balance;
@@ -110,10 +111,25 @@ refreshAddress: function () {
     console.log(tok.address);
     self.ShowSupply();
     self.hubBalance();
+    self.crowdsaleAddress();
     return tok.symbol.call();
   }).then(function (sym) {
     $("#t_sym1").html(sym);
     console.log(sym);
+  });
+},
+
+crowdsaleAddress: function () {
+  var self=this;
+  var instance;
+  var tok;
+  var ico;
+  Crowdsale.deployed().then(function(instance) {
+    ico=instance;
+    ico_address=ico.address;
+  //  console.log(tok);
+  //  $("#tokdAddress").html(tok.address);
+    console.log(ico.address);
   });
 },
 
@@ -197,6 +213,41 @@ sendToken: function () {
     });
 },
 
+sendICOToken: function () {
+  var self=this;
+  var pos="#transfer_result2";
+  var instance;
+  var msg;
+  var tok;
+  var val = $("#transfer_am2").val();
+  var to = $("#transfer_to2").val();
+
+  val=web3.toWei(val);
+//  to=web3.toWei(val);
+
+
+  Token.deployed().then(function(instance){
+    tok=instance;
+    msg="Wait..";
+    /**
+
+    **/
+     return tok.transfer(to, val, {from: account})
+   }).then(function (tx) {
+        console.log("tx:");
+        console.log(tx);
+        msg="Transaction complete";
+        self.setStatusPos(pos,msg);
+        self.refreshAddress();
+  }).catch(function(e) {
+      console.log(e);
+
+     msg="Ошибка при отправке, смотри консоль";
+     self.setStatusPos(pos,msg);
+    });
+},
+
+
 
 // Send to,val. Be aware of number type in "to".
 sendTokVal: function (to,val) {
@@ -277,10 +328,125 @@ startManager: function () {
 },
 
 
+sendMoney: function () {
+
+  var self=this;
+  var pos="#money_result";
+  var instance;
+  var msg;
+  var tok;
+  var ico;
+
+    var val = $("#fundAmount").val();
+//  var to = $("#founder_ico").val();
+
+  val=web3.toWei(val);
+//  to=web3.toWei(val);
 
 
+  Crowdsale.deployed().then(function(instance){
+    ico=instance;
+    msg="Wait..";
+    /**
+
+    **/
+     return ico.buy({from: account, value:val, gas:3000000})
+   }).then(function (tx) {
+        console.log("tx:");
+        console.log(tx);
+        msg="Transaction complete";
+        self.setStatusPos(pos,msg);
+        self.refreshAddress();
+  }).catch(function(e) {
+      console.log(e);
+
+     msg="Ошибка при отправке, смотри консоль";
+     self.setStatusPos(pos,msg);
+    });
 
 
+},
+
+
+Allow: function () {
+
+  var self=this;
+  var pos="#allow_result";
+  var instance;
+  var msg;
+  var tok;
+  var ico;
+
+    var val = $("#allowAmount").val();
+//  var to = $("#founder_ico").val();
+
+  val=web3.toWei(val);
+//  to=web3.toWei(val);
+
+
+  Token.deployed().then(function(instance){
+    tok=instance;
+    msg="Wait..";
+    /**
+
+    **/
+     return tok.approve(ico_address,val,{from: account,gas:3000000})
+   }).then(function (tx) {
+        console.log("tx:");
+        console.log(tx);
+        msg="Transaction complete";
+        self.setStatusPos(pos,msg);
+        self.refreshAddress();
+  }).catch(function(e) {
+      console.log(e);
+
+     msg="Ошибка при отправке, смотри консоль";
+     self.setStatusPos(pos,msg);
+    });
+
+
+},
+
+sendToken: function () {
+
+  var self=this;
+  var pos="#Tok_result";
+  var instance;
+  var msg;
+  var tok;
+  var ico;
+//  var from;
+
+    var val = $("#TokAmount").val();
+//  var to = $("#founder_ico").val();
+
+  val=web3.toWei(val);
+//  to=web3.toWei(val);
+
+
+  Crowdsale.deployed().then(function(instance){
+    ico=instance;
+    msg="Wait..";
+    /**
+
+    **/
+
+     return ico.buyforTokens(account,val,{from: account,gas:3000000})
+   }).then(function (tx) {
+        console.log("tx:");
+        console.log(tx);
+        msg="Transaction complete";
+        self.setStatusPos(pos,msg);
+        self.refreshAddress();
+  }).catch(function(e) {
+      console.log(e);
+
+     msg="Ошибка при отправке, смотри консоль";
+     self.setStatusPos(pos,msg);
+    });
+
+
+},
 
 
 
