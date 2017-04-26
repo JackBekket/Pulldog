@@ -111,6 +111,7 @@ refreshAddress: function () {
     console.log(tok.address);
     self.ShowSupply();
     self.hubBalance();
+    self.IcoBalance();
     self.crowdsaleAddress();
     return tok.symbol.call();
   }).then(function (sym) {
@@ -130,6 +131,10 @@ crowdsaleAddress: function () {
   //  console.log(tok);
   //  $("#tokdAddress").html(tok.address);
     console.log(ico.address);
+    return ico.symbol.call();
+  }).then(function (sym) {
+    $("#t_sym2").html(sym);
+    console.log(sym);
   });
 },
 
@@ -164,6 +169,31 @@ hubBalance: function () {
   var tok;
   Token.deployed().then(function(instance){
     tok=instance;
+    msg="Wait..";
+    self.setStatusPos(pos,msg);
+     return tok.balanceOf(account);
+   }).then(function (tx) {
+  //     $("#totalSup").html(ts)
+        console.log("tx:");
+        console.log(tx);
+      // Should I use msg=ts.valueOf(); ?
+        msg=tx.valueOf();
+        msg=web3.fromWei(msg);
+        self.setStatusPos(pos,msg);
+  });
+
+},
+
+//Balance of ICO tokens
+IcoBalance: function () {
+  var self=this;
+  var pos="#balance2";
+  var instance;
+  var msg;
+  var tok;
+  var ico;
+  Crowdsale.deployed().then(function(instance){
+    ico=instance;
     msg="Wait..";
     self.setStatusPos(pos,msg);
      return tok.balanceOf(account);
