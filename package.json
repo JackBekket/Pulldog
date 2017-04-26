@@ -1,13 +1,13 @@
 {
-  "name": "truffle-init-webpack",
+  "name": "PullDog",
   "version": "0.0.1",
-  "description": "Frontend example using truffle v3",
+  "description": "",
   "scripts": {
     "lint": "eslint ./",
     "build": "webpack",
     "dev": "webpack-dev-server"
   },
-  "author": "Douglas von Kohorn",
+  "author": "Sergey Ponomarev",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.22.2",
