@@ -16,6 +16,7 @@ contract CDT is StandardToken {
   string public constant name = "CrowdsaleDummyToken";
   string public constant symbol = "CDT";
   uint public constant decimals = 18;
+  uint public TOKEN_SUPPLY_LIMIT = 606 * 100000 * (1 ether / 1 wei);
   // replace with your fund collection multisig address
   address public constant multisig = 0x0;
 
@@ -23,19 +24,24 @@ contract CDT is StandardToken {
   // 1 ether = 500 example tokens
   uint public constant PRICE = 606;
 
+//fallback
   function () payable {
-    createTokens(msg.sender);
+    buy(msg.sender);
   }
 
-  function createTokens(address recipient) payable {
+
+
+// Function buy tokens.
+  function buy(address recipient) payable {
     if (msg.value == 0) {
       throw;
     }
 
-    uint tokens = msg.value.mul(getPrice());
-    totalSupply = totalSupply.add(tokens);
+    uint newTokens = msg.value.mul(getPrice());
+    if (totalSupply + newTokens > TOKEN_SUPPLY_LIMIT) throw;
+    totalSupply = totalSupply.add(newTokens);
 
-    balances[recipient] = balances[recipient].add(tokens);
+    balances[recipient] = balances[recipient].add(newTokens);
 
     if (!multisig.send(msg.value)) {
       throw;
@@ -46,4 +52,14 @@ contract CDT is StandardToken {
   function getPrice() constant returns (uint result) {
     return PRICE;
   }
+
+
+//Function allowing ICO participating for Ethereum ERC20 token holders.
+function buyforTokens(address recepient) payable {
+  
+}
+
+
+
+
 }
