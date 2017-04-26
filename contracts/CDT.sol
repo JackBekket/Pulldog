@@ -1,7 +1,7 @@
 pragma solidity ^0.4.8;
 
 
-import "./Zeppelin/StandardToken.sol";
+import "./Zeppelin/token/StandardToken.sol";
 
 import "./Zeppelin/ownership/Ownable.sol";
 
@@ -85,16 +85,16 @@ function CDT(token paybleToken){
 
 //Function allowing ICO participating for Ethereum ERC20 token holders.
 ///@param value - how much payable tokens will be paid.
-function buyforTokens(address recepient, uint value) payable {
+function buyforTokens(address recipient, uint value) payable {
 
     //check for limit
     uint newTokens = value.mul(getPrice());
     if (totalSupply + newTokens > TOKEN_SUPPLY_LIMIT) throw;
 
     //check for allowance and transferFrom
-    uint allowed = payableTokenAddress.allowance(recepient,this);
+    uint allowed = payableTokenAddress.allowance(recipient,this);
     if (value < allowed) throw;
-    payableTokenAddress.transferFrom(recepient,this,value);
+    payableTokenAddress.transferFrom(recipient,this,value);
     tokensGot.add(value);
 
     totalSupply = totalSupply.add(newTokens);
