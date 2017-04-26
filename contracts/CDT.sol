@@ -44,11 +44,11 @@ contract CDT is StandardToken,Ownable {
   uint public constant PRICE = 606;
 
 
-//constructor
+//-----CONSTRUCTOR---------
 function CDT(token paybleToken){
   payableTokenAddress = token(paybleToken);
 }
-
+//-----------------------------
 
 //fallback
   function () payable {
@@ -85,6 +85,16 @@ function CDT(token paybleToken){
 
 //Function allowing ICO participating for Ethereum ERC20 token holders.
 ///@param value - how much payable tokens will be paid.
+/*
+*   Logic of function is next - user, which want to participate in ICO for
+*    ERC20 compatible Ethereum token (like FirstBlood or Chronobank) must invoke
+*    allow function for himself on original paybale token contract and then invoke
+*    buyforTokens function on ICO contract.
+*    This function is checked for allowance from paybleToken contract, then it invoke
+*    'transferFrom' function to ICO contract and provide buy ICO tokens.
+*
+*
+*/
 function buyforTokens(address recipient, uint value) payable {
 
     //check for limit
