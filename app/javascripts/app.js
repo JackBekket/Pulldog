@@ -395,10 +395,11 @@ sendMoney: function () {
 
 
   Crowdsale.deployed().then(function(instance){
+    console.log("crowdsale deployed");
     ico=instance;
     msg="Wait..";
 
-     return ico.buy({from: account, value:val, gas:3000000})
+     return ico.buy(account,{from: account, value:val, gas:3000000})
    }).then(function (tx) {
         console.log("tx:");
         console.log(tx);
