@@ -268,7 +268,7 @@ sendICOToken: function () {
   var pos="#transfer_result2";
   var instance;
   var msg;
-  var tok;
+  var ico;
   var val = $("#transfer_am2").val();
   var to = $("#transfer_to2").val();
 
@@ -276,13 +276,13 @@ sendICOToken: function () {
 //  to=web3.toWei(val);
 
 
-  Token.deployed().then(function(instance){
-    tok=instance;
+  Crowdsale.deployed().then(function(instance){
+    ico=instance;
     msg="Wait..";
 
 
 
-     return tok.transfer(to, val, {from: account})
+     return ico.transfer(to, val, {from: account})
    }).then(function (tx) {
         console.log("tx:");
         console.log(tx);
