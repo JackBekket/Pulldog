@@ -52,7 +52,7 @@ window.App = {
     // Bootstrap the Token abstraction for Use.
     Token.setProvider(web3.currentProvider);
 
-//    Crowdsale.setProvider(web3.currentProvider);
+    Crowdsale.setProvider(web3.currentProvider);
 
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function(err, accs) {
@@ -113,8 +113,8 @@ refreshAddress: function () {
     console.log(tok.address);
 //    self.ShowSupply();
     self.hubBalance();
-//    self.crowdsaleAddress();
-//    self.IcoBalance();
+    self.crowdsaleAddress();
+    self.IcoBalance();
 
     return tok.symbol.call();
   }).then(function (sym) {
@@ -125,7 +125,7 @@ refreshAddress: function () {
 },
 
 
-/**
+
 crowdsaleAddress: function () {
   var self=this;
   var instance;
@@ -143,7 +143,7 @@ crowdsaleAddress: function () {
     console.log(sym);
   });
 },
-*/
+
 
 
   ShowSupply: function () {
@@ -194,7 +194,7 @@ hubBalance: function () {
 },
 
 
-/*
+
 //Balance of ICO tokens
 IcoBalance: function () {
   var self=this;
@@ -220,7 +220,7 @@ IcoBalance: function () {
   });
 
 },
-*/
+
 
 
 sendToken: function () {
@@ -262,7 +262,7 @@ sendToken: function () {
 
 
 
-/**
+
 sendICOToken: function () {
   var self=this;
   var pos="#transfer_result2";
@@ -296,7 +296,7 @@ sendICOToken: function () {
      self.setStatusPos(pos,msg);
     });
 },
-**/
+
 
 
 // Send to,val. Be aware of number type in "to".
@@ -377,7 +377,7 @@ startManager: function () {
   self.start();
 },
 
-/**
+
 sendMoney: function () {
 
   var self=this;
@@ -452,7 +452,7 @@ Allow: function () {
 
 
 },
-**/
+
 
 
 
