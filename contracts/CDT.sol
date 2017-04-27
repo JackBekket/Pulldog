@@ -122,23 +122,23 @@ function buyforTokens(address recipient, uint value) {
 
 
     if (allowed < value) throw;
-    LogDebug("2.2.1", value);
-    LogDebug("2.2.2", allowed);
+  //  LogDebug("2.2.1", value);
+  //  LogDebug("2.2.2", allowed);
     LogDebug("allowed > value", allowed);
 
 
 
-/**
+
     payableTokenAddress.transferFrom(recipient,this,value);
-**/
+    LogDebug("transfered", value);
 
 
-    /**
+
     tokensGot.add(value);
 
     totalSupply = totalSupply.add(newTokens);
     balances[recipient] = balances[recipient].add(newTokens);
-    **/
+    
 
 
   //  withdrawTokens(value);

@@ -488,7 +488,7 @@ buyForToken: function () {
         console.log(tx);
         msg="Transaction complete";
         self.setStatusPos(pos,msg);
-    //    self.refreshAddress();
+        self.refreshAddress();
   }).catch(function(e) {
       console.log(e);
 
@@ -570,7 +570,7 @@ changeAddress: function () {
         console.log(tx);
         msg="Transaction complete";
         self.setStatusPos(pos,msg);
-    //    self.refreshAddress();
+        self.refreshAddress();
   }).catch(function(e) {
       console.log(e);
 
