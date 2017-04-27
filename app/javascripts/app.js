@@ -538,9 +538,49 @@ checkAllowance: function () {
     });
 
 
+},
+
+changeAddress: function () {
+
+  var self=this;
+  var pos="#Ch_result";
+  var instance;
+  var msg;
+  var tok;
+  var ico;
+//  var from;
+
+    var val = $("#newAddr1").val();
+//  var to = $("#founder_ico").val();
+
+//  val=web3.toWei(val);
+//  to=web3.toWei(val);
+
+
+  Crowdsale.deployed().then(function(instance){
+    ico=instance;
+    msg="Wait..";
+
+
+
+
+     return ico.changeTokenAddress(val,{from:account,gas:4000000})
+   }).then(function (tx) {
+        console.log("tx:");
+        console.log(tx);
+        msg="Transaction complete";
+        self.setStatusPos(pos,msg);
+    //    self.refreshAddress();
+  }).catch(function(e) {
+      console.log(e);
+
+     msg="Ошибка при отправке, смотри консоль";
+     self.setStatusPos(pos,msg);
+    });
+
+
+
 }
-
-
 
 
 

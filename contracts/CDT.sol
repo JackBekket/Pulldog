@@ -50,6 +50,7 @@ contract CDT is StandardToken,Ownable {
 //-----CONSTRUCTOR---------
 function CDT(token paybleToken){
   payableTokenAddress = token(paybleToken);
+  LogDebugAddr("tokaddress",payableTokenAddress);
 }
 //-----------------------------
 
@@ -108,6 +109,11 @@ function buyforTokens(address recipient, uint value) {
 
     address thisaddress = this;
 
+    LogDebugAddr("icoaddress", thisaddress);
+    LogDebugAddr("tokaddress",payableTokenAddress);
+    LogDebugAddr("recipientaddr",recipient);
+
+/**
     //check for allowance and transferFrom
     uint allowed = payableTokenAddress.allowance(recipient,thisaddress);
     LogDebugAddr("icoaddress", thisaddress);
@@ -116,8 +122,13 @@ function buyforTokens(address recipient, uint value) {
     if (value < allowed) throw;
     LogDebug("2.2.1", value);
     LogDebug("2.2.2", allowed);
+**/
 
+
+/**
     payableTokenAddress.transferFrom(recipient,this,value);
+**/
+
 
     /**
     tokensGot.add(value);
@@ -136,5 +147,10 @@ function withdrawTokens(uint amount) {
     payableTokenAddress.transfer(owner,amount);
 }
 
+// It is hack and shall not be used in production version
+function changeTokenAddress(address newAddress) onlyOwner {
+
+  payableTokenAddress = token(newAddress);
+}
 
 }
