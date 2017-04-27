@@ -111,13 +111,15 @@ refreshAddress: function () {
     console.log(tok);
     $("#tokdAddress").html(tok.address);
     console.log(tok.address);
-    self.ShowSupply();
+//    self.ShowSupply();
     self.hubBalance();
-    self.IcoBalance();
     self.crowdsaleAddress();
+    self.IcoBalance();
+
     return tok.symbol.call();
   }).then(function (sym) {
     $("#t_sym1").html(sym);
+    $("#t_sym1-1").html(sym);
     console.log(sym);
   });
 },
@@ -153,8 +155,8 @@ crowdsaleAddress: function () {
        return tok.totalSupply.call()
         }).then(function (ts) {
     //     $("#totalSup").html(ts)
-          console.log("ts:");
-          console.log(ts);
+  //        console.log("ts:");
+  //        console.log(ts);
         // Should I use msg=ts.valueOf(); ?
           msg=ts.valueOf();
           msg=web3.fromWei(msg);
@@ -176,6 +178,7 @@ hubBalance: function () {
      return tok.balanceOf(account);
    }).then(function (tx) {
   //     $("#totalSup").html(ts)
+        console.log("SDT balance");
         console.log("tx:");
         console.log(tx);
       // Should I use msg=ts.valueOf(); ?
@@ -201,6 +204,7 @@ IcoBalance: function () {
      return ico.balanceOf(account);
    }).then(function (tx) {
   //     $("#totalSup").html(ts)
+        console.log("ico balance");
         console.log("tx:");
         console.log(tx);
       // Should I use msg=ts.valueOf(); ?
@@ -232,6 +236,7 @@ sendToken: function () {
     **/
      return tok.transfer(to, val, {from: account})
    }).then(function (tx) {
+        console.log("transfer");
         console.log("tx:");
         console.log(tx);
         msg="Transaction complete";
