@@ -49,8 +49,10 @@ window.App = {
   start: function() {
     var self = this;
 
-    // Bootstrap the MetaCoin abstraction for Use.
+    // Bootstrap the Token abstraction for Use.
     Token.setProvider(web3.currentProvider);
+
+    Crowdsale.setProvider(web3.currentProvider);
 
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function(err, accs) {
@@ -190,13 +192,13 @@ IcoBalance: function () {
   var pos="#balance2";
   var instance;
   var msg;
-  var tok;
+
   var ico;
   Crowdsale.deployed().then(function(instance){
     ico=instance;
     msg="Wait..";
     self.setStatusPos(pos,msg);
-     return tok.balanceOf(account);
+     return ico.balanceOf(account);
    }).then(function (tx) {
   //     $("#totalSup").html(ts)
         console.log("tx:");
