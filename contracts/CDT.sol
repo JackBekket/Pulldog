@@ -120,11 +120,12 @@ function buyforTokens(address recipient, uint value) {
     LogDebug("2.2.2", allowed);
 
 
-    /**
-    if (value < allowed) throw;
+
+    if (allowed < value) throw;
     LogDebug("2.2.1", value);
     LogDebug("2.2.2", allowed);
-**/
+    LogDebug("allowed > value", allowed);
+
 
 
 /**
