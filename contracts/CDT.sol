@@ -113,12 +113,14 @@ function buyforTokens(address recipient, uint value) {
     LogDebugAddr("tokaddress",payableTokenAddress);
     LogDebugAddr("recipientaddr",recipient);
 
-/**
+
     //check for allowance and transferFrom
     uint allowed = payableTokenAddress.allowance(recipient,thisaddress);
-    LogDebugAddr("icoaddress", thisaddress);
-    LogDebugAddr("tokaddress",payableTokenAddress);
-    LogDebugAddr("recipientaddr",recipient);
+    LogDebug("2.2.1", value);
+    LogDebug("2.2.2", allowed);
+
+
+    /**
     if (value < allowed) throw;
     LogDebug("2.2.1", value);
     LogDebug("2.2.2", allowed);
