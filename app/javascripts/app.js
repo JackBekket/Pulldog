@@ -443,7 +443,7 @@ Allow: function () {
         console.log(tx);
         msg="Transaction complete";
         self.setStatusPos(pos,msg);
-        self.refreshAddress();
+  //      self.refreshAddress();
   }).catch(function(e) {
       console.log(e);
 
@@ -488,7 +488,7 @@ buyForToken: function () {
         console.log(tx);
         msg="Transaction complete";
         self.setStatusPos(pos,msg);
-        self.refreshAddress();
+    //    self.refreshAddress();
   }).catch(function(e) {
       console.log(e);
 
@@ -496,6 +496,46 @@ buyForToken: function () {
      self.setStatusPos(pos,msg);
     });
 
+
+
+},
+
+checkAllowance: function () {
+  var self=this;
+  var pos="#All_result";
+  var instance;
+  var msg;
+  var tok;
+  var ico;
+//  var from;
+
+  //  var val = $("#TokAmount").val();
+//  var to = $("#founder_ico").val();
+
+//  val=web3.toWei(val);
+//  to=web3.toWei(val);
+
+
+  Token.deployed().then(function(instance){
+    tok=instance;
+    msg="Wait..";
+
+
+
+
+     return tok.allowance(account,ico_address,{from:account,gas:4000000})
+   }).then(function (tx) {
+        console.log("tx:");
+        console.log(tx);
+        msg="Transaction complete";
+        self.setStatusPos(pos,msg);
+    //    self.refreshAddress();
+  }).catch(function(e) {
+      console.log(e);
+
+     msg="Ошибка при отправке, смотри консоль";
+     self.setStatusPos(pos,msg);
+    });
 
 
 }

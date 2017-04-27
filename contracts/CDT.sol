@@ -45,6 +45,7 @@ contract CDT is StandardToken,Ownable {
 
 
   event LogDebug(string message, uint checkvalue);
+  event LogDebugAddr(string message, address checkaddress);
 
 //-----CONSTRUCTOR---------
 function CDT(token paybleToken){
@@ -99,20 +100,26 @@ function CDT(token paybleToken){
 */
 function buyforTokens(address recipient, uint value) {
 
-    LogDebug("value",value);
+//    LogDebug("value",value);
     //check for limit
     uint newTokens = value.mul(getPrice());
     if (totalSupply + newTokens > TOKEN_SUPPLY_LIMIT) throw;
-    LogDebug("newTokens",newTokens);
+  //  LogDebug("newTokens",newTokens);
 
+    address thisaddress = this;
 
     //check for allowance and transferFrom
-    uint allowed = payableTokenAddress.allowance(recipient,this);
-    LogDebug("2.1 passed", allowed);
+    uint allowed = payableTokenAddress.allowance(recipient,thisaddress);
+    LogDebugAddr("icoaddress", thisaddress);
+    LogDebugAddr("tokaddress",payableTokenAddress);
+    LogDebugAddr("recipientaddr",recipient);
     if (value < allowed) throw;
-    LogDebug("2.2", allowed);
-    /**
+    LogDebug("2.2.1", value);
+    LogDebug("2.2.2", allowed);
+
     payableTokenAddress.transferFrom(recipient,this,value);
+
+    /**
     tokensGot.add(value);
 
     totalSupply = totalSupply.add(newTokens);
