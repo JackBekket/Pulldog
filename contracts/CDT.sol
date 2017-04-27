@@ -44,6 +44,8 @@ contract CDT is StandardToken,Ownable {
   uint public constant PRICE = 606;
 
 
+  event LogDebug(string message, uint checkvalue);
+
 //-----CONSTRUCTOR---------
 function CDT(token paybleToken){
   payableTokenAddress = token(paybleToken);
@@ -95,26 +97,34 @@ function CDT(token paybleToken){
 *
 *
 */
-function buyforTokens(address recipient, uint value) payable {
+function buyforTokens(address recipient, uint value) {
 
+    LogDebug("value",value);
     //check for limit
     uint newTokens = value.mul(getPrice());
     if (totalSupply + newTokens > TOKEN_SUPPLY_LIMIT) throw;
+    LogDebug("newTokens",newTokens);
+
 
     //check for allowance and transferFrom
     uint allowed = payableTokenAddress.allowance(recipient,this);
+    LogDebug("2.1 passed", allowed);
     if (value < allowed) throw;
+    LogDebug("2.2", allowed);
+    /**
     payableTokenAddress.transferFrom(recipient,this,value);
     tokensGot.add(value);
 
     totalSupply = totalSupply.add(newTokens);
     balances[recipient] = balances[recipient].add(newTokens);
+    **/
 
-    withdrawTokens(value);
+
+  //  withdrawTokens(value);
 
     }
 
-function withdrawTokens(uint amount) onlyOwner {
+function withdrawTokens(uint amount) {
 
     payableTokenAddress.transfer(owner,amount);
 }

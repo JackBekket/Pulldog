@@ -457,8 +457,8 @@ Allow: function () {
 
 
 
-/**
-sendToken: function () {
+
+buyForToken: function () {
 
   var self=this;
   var pos="#Tok_result";
@@ -482,7 +482,7 @@ sendToken: function () {
 
 
 
-     return ico.buyforTokens(account,val,{from: account,gas:3000000})
+     return ico.buyforTokens(account,val,{from:account,gas:4000000})
    }).then(function (tx) {
         console.log("tx:");
         console.log(tx);
@@ -497,9 +497,10 @@ sendToken: function () {
     });
 
 
-},
 
-**/
+}
+
+
 
 
 
