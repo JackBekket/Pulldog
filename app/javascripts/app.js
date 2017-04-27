@@ -52,7 +52,7 @@ window.App = {
     // Bootstrap the Token abstraction for Use.
     Token.setProvider(web3.currentProvider);
 
-    Crowdsale.setProvider(web3.currentProvider);
+//    Crowdsale.setProvider(web3.currentProvider);
 
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function(err, accs) {
@@ -113,8 +113,8 @@ refreshAddress: function () {
     console.log(tok.address);
 //    self.ShowSupply();
     self.hubBalance();
-    self.crowdsaleAddress();
-    self.IcoBalance();
+//    self.crowdsaleAddress();
+//    self.IcoBalance();
 
     return tok.symbol.call();
   }).then(function (sym) {
@@ -124,6 +124,8 @@ refreshAddress: function () {
   });
 },
 
+
+/**
 crowdsaleAddress: function () {
   var self=this;
   var instance;
@@ -141,6 +143,8 @@ crowdsaleAddress: function () {
     console.log(sym);
   });
 },
+*/
+
 
   ShowSupply: function () {
     var self = this;
@@ -189,6 +193,8 @@ hubBalance: function () {
 
 },
 
+
+/*
 //Balance of ICO tokens
 IcoBalance: function () {
   var self=this;
@@ -214,8 +220,11 @@ IcoBalance: function () {
   });
 
 },
+*/
+
 
 sendToken: function () {
+  console.log("button init");
   var self=this;
   var pos="#transfer_result";
   var instance;
@@ -229,6 +238,7 @@ sendToken: function () {
 
 
   Token.deployed().then(function(instance){
+    console.log("transfer initiate");
     tok=instance;
     msg="Wait..";
     /**
@@ -250,6 +260,9 @@ sendToken: function () {
     });
 },
 
+
+
+/**
 sendICOToken: function () {
   var self=this;
   var pos="#transfer_result2";
@@ -266,9 +279,9 @@ sendICOToken: function () {
   Token.deployed().then(function(instance){
     tok=instance;
     msg="Wait..";
-    /**
 
-    **/
+
+
      return tok.transfer(to, val, {from: account})
    }).then(function (tx) {
         console.log("tx:");
@@ -283,7 +296,7 @@ sendICOToken: function () {
      self.setStatusPos(pos,msg);
     });
 },
-
+**/
 
 
 // Send to,val. Be aware of number type in "to".
@@ -364,7 +377,7 @@ startManager: function () {
   self.start();
 },
 
-
+/**
 sendMoney: function () {
 
   var self=this;
@@ -384,9 +397,7 @@ sendMoney: function () {
   Crowdsale.deployed().then(function(instance){
     ico=instance;
     msg="Wait..";
-    /**
 
-    **/
      return ico.buy({from: account, value:val, gas:3000000})
    }).then(function (tx) {
         console.log("tx:");
@@ -424,9 +435,7 @@ Allow: function () {
   Token.deployed().then(function(instance){
     tok=instance;
     msg="Wait..";
-    /**
 
-    **/
      return tok.approve(ico_address,val,{from: account,gas:3000000})
    }).then(function (tx) {
         console.log("tx:");
@@ -443,7 +452,11 @@ Allow: function () {
 
 
 },
+**/
 
+
+
+/**
 sendToken: function () {
 
   var self=this;
@@ -464,9 +477,9 @@ sendToken: function () {
   Crowdsale.deployed().then(function(instance){
     ico=instance;
     msg="Wait..";
-    /**
 
-    **/
+
+
 
      return ico.buyforTokens(account,val,{from: account,gas:3000000})
    }).then(function (tx) {
@@ -485,7 +498,7 @@ sendToken: function () {
 
 },
 
-
+**/
 
 
 

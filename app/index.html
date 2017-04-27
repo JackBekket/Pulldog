@@ -110,25 +110,25 @@
     </div>
     <hr/>
 
-    <div class="section">
+    <div class="section2">
        <h2><center>Отправить payable tokens</center></h2>
       <p align="left"><left> Здесь можно кому-то перевести деньги вручную.</left></p><br>
      </br>
-    <label>   Сумма перевода </label><input type="text" id="transfer_am" value="10" />
+    <label>   Сумма перевода </label><input type="text" id="transfer_am" />
     <label>   Кому </label><input type="text" id="transfer_to" />
-         <button id="transfer" onclick="App.sendToken()">Перевести</button>
+         <button type="button" id="transfer" onclick="App.sendToken()">Перевести</button>
          <span id="transfer_result" color="blue"></span>
      </div>
      <hr/>
 
 
-     <div class="section">
+     <div class="section3">
         <h2><center>Отправить ICO токены</center></h2>
        <p align="left"><left> Здесь можно кому-то перевести деньги вручную.</left></p><br>
       </br>
      <label>   Сумма перевода </label><input type="text" id="transfer_am2" />
      <label>   Кому </label><input type="text" id="transfer_to2" />
-          <button id="transfer2" onclick="App.sendICOToken()">Перевести</button>
+          <button type="button" id="transfer2" onclick="App.sendICOToken()">Перевести</button>
           <span id="transfer_result2" color="blue"></span>
       </div>
       <hr/>
